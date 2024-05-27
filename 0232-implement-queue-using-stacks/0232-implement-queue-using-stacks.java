@@ -1,55 +1,46 @@
 import java.util.Stack;
 
 class MyQueue {
-    private Stack<Integer> input;
-    private Stack<Integer> output;
+    private Stack<Integer> s1;
+    private Stack<Integer> s2;
 
-    // Constructor to initialize the stacks
     public MyQueue() {
-        input = new Stack<>();
-        output = new Stack<>();
+        s1 = new Stack<>();
+        s2 = new Stack<>();
     }
-
-    // Pushes element x to the back of the queue.
+    
     public void push(int x) {
-        input.push(x);
+        s1.push(x);
     }
-
-    // Removes the element from the front of the queue and returns it.
+    
     public int pop() {
-        if (!output.isEmpty()) {
-            return output.pop();
-        } else {
-            while (!input.isEmpty()) {
-                output.push(input.pop());
+        if (s2.isEmpty()) {
+            while (!s1.isEmpty()) {
+                s2.push(s1.pop());
             }
-            return output.pop();
         }
+        return s2.pop();
     }
-
-    // Returns the element at the front of the queue.
+    
     public int peek() {
-        if (!output.isEmpty()) {
-            return output.peek();
-        } else {
-            while (!input.isEmpty()) {
-                output.push(input.pop());
+        if (s2.isEmpty()) {
+            while (!s1.isEmpty()) {
+                s2.push(s1.pop());
             }
-            return output.peek();
         }
+        return s2.peek();
     }
-
-    // Returns true if the queue is empty, false otherwise.
+    
     public boolean empty() {
-        return input.isEmpty() && output.isEmpty();
-    }
-
-    public static void main(String[] args) {
-        MyQueue myQueue = new MyQueue();
-        myQueue.push(1);
-        myQueue.push(2);
-        System.out.println(myQueue.peek()); // returns 1
-        System.out.println(myQueue.pop());  // returns 1
-        System.out.println(myQueue.empty()); // returns false
+        return s1.isEmpty() && s2.isEmpty();
     }
 }
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
