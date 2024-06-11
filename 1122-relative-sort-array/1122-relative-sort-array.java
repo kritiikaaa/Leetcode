@@ -9,12 +9,17 @@ class Solution {
                 }
             }
         }
+        int n= result.size();
+        int[] arr3 = new int[arr1.length];
+        for(int i=0; i<n; i++){
+            arr3[i] = result.get(i);
+        }
         Arrays.sort(arr1);
-        for(int i=0; i<arr1.length;i++){
+        for(int i=n; i<arr3.length;i++){
             if(arr1[i]!=-1){
-                result.add(arr1[i]);
+                arr3[i] = arr1[i];
             }
         }
-        return result.stream().mapToInt(Integer::intValue).toArray();
+        return arr3;
     }
 }
